@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Java Documentation</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Technical Documentation for Java">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <!-- vue.css theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css">
+  <style>
+    /* Base Theme Overrides for Dark Mode */
+    body {
+      background-color: #2b2b2b;
+      color: #eaeaea;
+    }
+    .markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4 {
+      color: #fff;
+    }
+    .markdown-section code {
+      color: #e06c75;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      padding: 2px 4px;
+    }
+    .markdown-section pre {
+      background-color: #f8f9fa; /* Light background for code blocks as per image 3 */
+      border: 1px solid #ddd;
+      color: #333;
+    }
+    .markdown-section pre>code {
+      color: #333;
+      background-color: transparent;
+      padding: 0;
+    }
+    /* Dashboard Layout */
+    .dashboard-container {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      align-items: flex-start;
+      margin-bottom: 30px;
+    }
+    .dashboard-col {
+      flex: 1;
+      padding: 15px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .col-blue { background-color: #dae8fc; }
+    .col-yellow { background-color: #fff2cc; }
+    .col-green { background-color: #d5e8d4; }
+
+    /* Dashboard Buttons */
+    .rect-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 15px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      font-weight: 500;
+      text-decoration: none !important;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      transition: all 0.2s ease;
+      color: #fff !important;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .rect-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    .btn-red { background: #dc3545; }
+    .btn-green { background: #198754; }
+    .btn-dark { background: #212529; }
+
+    /* Multi-column list for topics */
+    .topic-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+      margin-bottom: 30px;
+      background: #fff; /* Keeping white background for this section as per image 2 */
+      padding: 20px;
+      border-radius: 4px;
+    }
+    .topic-list ul {
+      list-style-type: disc;
+      margin: 0;
+      padding-left: 20px;
+    }
+    .topic-list li {
+      margin-bottom: 8px;
+    }
+    .topic-list a {
+      color: #0d6efd !important;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+    .topic-list a:hover {
+      text-decoration: underline;
+    }
+    .topic-list a.active {
+      background-color: #dc3545;
+      color: white !important;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    
+    /* Modern Dropdowns (Image 4 Style) */
+    details.custom-dropdown {
+      background-color: #333;
+      border: 1px solid #444;
+      margin-bottom: 15px;
+      padding: 0;
+      width: 100%;
+      border-radius: 4px;
+      position: relative;
+      display: block;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    details.custom-dropdown > summary {
+      padding: 12px 16px;
+      font-weight: bold;
+      font-size: 1.05rem;
+      color: #333;
+      cursor: pointer;
+      list-style: none; /* Hide default arrow */
+      display: flex;
+      align-items: center;
+      background-color: #e0e0e0; /* Light grey background */
+      margin: 0;
+      width: 100%;
+      box-sizing: border-box;
+      border-bottom: 1px solid transparent;
+    }
+    details.custom-dropdown[open] > summary {
+      border-bottom: 1px solid #444;
+    }
+    details.custom-dropdown > summary::-webkit-details-marker {
+      display: none;
+    }
+    details.custom-dropdown > summary::before {
+      content: '▸';
+      display: inline-block;
+      font-size: 1.2em;
+      color: #333;
+      margin-right: 12px;
+      transition: transform 0.2s ease;
+    }
+    details.custom-dropdown[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    details.custom-dropdown > summary:hover {
+      background-color: #d5d5d5;
+    }
+    
+    /* Content formatting inside custom details without div wrapper */
+    details.custom-dropdown > *:not(summary) {
+      padding-left: 40px;
+      padding-right: 15px;
+      color: #eaeaea; 
+      font-size: 1rem;
+      line-height: 1.6;
+      box-sizing: border-box;
+    }
+
+    details.custom-dropdown p {
+      white-space: pre-line;
+      margin-top: 0;
+    }
+
+    details.custom-dropdown pre {
+      white-space: pre; /* Restore code formatting */
+      overflow-x: auto;
+    }
+    
+    /* Ensure markdown within details renders nicely */
+    details.custom-dropdown > *:not(summary):first-of-type {
+      margin-top: 15px;
+    }
+    details.custom-dropdown > *:not(summary):last-of-type {
+      margin-bottom: 15px;
+    }
+    
+    details.custom-dropdown h1, 
+    details.custom-dropdown h2, 
+    details.custom-dropdown h3, 
+    details.custom-dropdown h4,
+    details.custom-dropdown h5,
+    details.custom-dropdown h6 {
+      margin-top: 18px;
+      margin-bottom: 10px;
+      color: #61dafb; /* Bright distinct blue strictly for headings */
+      font-weight: 600;
+    }
+
+    details.custom-dropdown strong, 
+    details.custom-dropdown b {
+      color: #42b983; /* Vue-green for bold pointers and methods */
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      name: 'Java Documentation',
+      repo: '',
+      loadSidebar: false, /* Disabled sidebar to use shapes/buttons instead */
+      subMaxLevel: 2,
+      search: {
+        maxAge: 86400000, // Expiration time, the default one day
+        paths: 'auto',
+        placeholder: 'Type to search',
+        noData: 'No Results!',
+        depth: 2
+      }
+    }
+  </script>
+  <!-- Docsify v4 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <!-- Search Plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <!-- Copy to Clipboard Plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  <!-- Java Syntax Highlighting -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
+</body>
+</html>
